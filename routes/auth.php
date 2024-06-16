@@ -25,7 +25,7 @@ Route::prefix('admin')->group(function(){
         Route::controller(AuthenticatedSessionController::class)->group(function() {
             Route::get('login', 'create')->name('login');
             Route::post('login', 'store');
-            Route::post('logout','destroy')->name('logout');
+
         });
 
         Route::controller(PasswordResetLinkController::class)->group(function() {
@@ -56,6 +56,8 @@ Route::prefix('admin')->group(function(){
             Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
+
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
         Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
